@@ -26,7 +26,8 @@ of Simple CSS Waves-->
 
     <!--Content starts-->
     <div class="content flex">
-      <p style="font-family: cursive;font-size: 16px;color: var(--color);">晋ICP备18013488号-1 千拾 2022</p>
+      <p style="font-family: cursive;font-size: 16px;color: var(--color);">
+        <a href="https://beian.miit.gov.cn/" target="_bland">晋ICP备18013488号-1</a> 千拾 {{ new Date().getFullYear() }}</p>
     </div>
     <!--Content ends-->
   </div>
