@@ -449,6 +449,7 @@ watch(hScroll, (newVal) => {});
     flex-wrap: wrap;
     .leftList {
       width: 70%;
+      min-height: 1167px;
       .artBox {
         position: relative;
         width: 100%;
