@@ -18,7 +18,11 @@ const routes: Array<RouteRecordRaw> = [
         path: '/',
         // component: defineAsyncComponent(() => import('@/views/home/index.vue')),
         component: () => import('@/views/home/index.vue'),
-        children: []
+        children: [],
+        meta: { 
+          title: '首页',
+          description: '首页'
+        }
       },
       {
         name: 'demo',
@@ -31,25 +35,41 @@ const routes: Array<RouteRecordRaw> = [
         name: 'artDetail',
         path: '/artDetail',
         // component: moduleFiles['../views/artDetail/index.vue']
-        component: () => import('@/views/artDetail/index.vue')
+        component: () => import('@/views/artDetail/index.vue'),
+        meta: { 
+          title: '文章详情',
+          description: '当前文章详细内容'
+        }
       },
       {
         name: 'friendshipChain',
         path: '/friendshipChain',
         // component: moduleFiles['../views/friendshipChain/index.vue']
-        component: () => import('@/views/friendshipChain/index.vue')
+        component: () => import('@/views/friendshipChain/index.vue'),
+        meta: { 
+          title: '友链',
+          description: '友情链接'
+        }
       },
       {
         name: 'log',
         path: '/log',
         // component: moduleFiles['../views/log/index.vue']
-        component: () => import('@/views/log/index.vue')
+        component: () => import('@/views/log/index.vue'),
+        meta: { 
+          title: '更新日志',
+          description: '更新日志'
+        }
       },
       {
         name: 'about',
         path: '/about',
         // component: moduleFiles['../views/about/index.vue']
-        component: () => import('@/views/about/index.vue')
+        component: () => import('@/views/about/index.vue'),
+        meta: { 
+          title: '关于',
+          description: '关于'
+        }
       }
     ]
   }
@@ -61,7 +81,21 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  // useStore().setMyLoading(true)
+  if (to.meta.title) {
+    (document as any).title = to.meta.title;
+  }
+  
+
+  console.log(document.head) 
+  const metaDescription = document.querySelector('meta[name="description"]')
+  if (metaDescription) {
+    metaDescription.setAttribute('content', to.meta.description as string)
+  } else {
+    const routerMeta = document.createElement('meta')
+    routerMeta.setAttribute('name', 'description')
+    routerMeta.setAttribute('content', to.meta.description as string)
+    document.head.appendChild(routerMeta)
+  }
   next()
 })
 
